@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Very Own Weather Forecast</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>
+        $(document).ready(function() {         
+            $('form').submit(function() {
+                var city = $("#city").val();
+                var url = "http://api.openweathermap.org/data/2.5/weather?q=";
+                var key = "702770f62fab794949990a9042caef1c";
+                $.get(url + city  + "&units=imperial" + "&&appid=" + key, function(response) {
+                    var temp = (response["main"]["temp"]);
+                    $("#result").append(`<h4>The current temperature in ${city}  is ${temp} degrees Fahrenheit</h4>`);
+                }, 'json');
+                return false;
+            })
+        });
+    </script>
+</head>
+<body>
+    <div id="search_bar">
+        <h4>Input the name of a city to see the current weather</h4>
+        <form>
+            <input type="text" name="city" id="city">
+            <input type="submit" class="button" value="Submit">
+        </form>
+    </div>
+    <div id="result"></div>
+</body>
+</html>
